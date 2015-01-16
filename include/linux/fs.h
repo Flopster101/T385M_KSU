@@ -971,6 +971,7 @@ struct file_lock {
 struct file_lock_context {
 	struct list_head	flc_flock;
 	struct list_head	flc_posix;
+	struct list_head	flc_lease;
 };
 
 /* The following constant reflects the upper bound of the file/locking space */
@@ -1985,7 +1986,7 @@ static inline int break_lease(struct inode *inode, unsigned int mode)
 	 * file.
 	 */
 	smp_mb();
-	if (inode->i_flock)
+	if (inode->i_flctx && !list_empty_careful(&inode->i_flctx->flc_lease))
 		return __break_lease(inode, mode, FL_LEASE);
 	return 0;
 }
@@ -1999,7 +2000,7 @@ static inline int break_deleg(struct inode *inode, unsigned int mode)
 	 * file.
 	 */
 	smp_mb();
-	if (inode->i_flock)
+	if (inode->i_flctx && !list_empty_careful(&inode->i_flctx->flc_lease))
 		return __break_lease(inode, mode, FL_DELEG);
 	return 0;
 }
