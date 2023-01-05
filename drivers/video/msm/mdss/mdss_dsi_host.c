@@ -1615,7 +1615,7 @@ static void print_cmd_desc(struct mdss_dsi_ctrl_pdata *ctrl,
 		struct dsi_cmd_desc *cmds, int cnt)
 {
 	struct samsung_display_driver_data *vdd = NULL;
-	char buf[1016]; // temp 1024 -> 1000
+	char buf[1000]; // temp 1024 -> 1000
 	int len;
 	int i,j;
 
