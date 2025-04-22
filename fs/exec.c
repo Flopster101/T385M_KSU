@@ -1572,6 +1572,10 @@ static int exec_binprm(struct linux_binprm *bprm)
 	return ret;
 }
 
+/* INFO: KernelSU hook */
+extern int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
+                               void *envp, int *flags);
+
 /*
  * sys_execve() executes a new program.
  */
@@ -1583,6 +1587,9 @@ static int do_execve_common(struct filename *filename,
 	struct file *file;
 	struct files_struct *displaced;
 	int retval;
+
+	/* INFO: Call KSU hook */
+	ksu_handle_execveat(NULL, &filename, &argv, &envp, NULL);
 
 	if (IS_ERR(filename))
 		return PTR_ERR(filename);
