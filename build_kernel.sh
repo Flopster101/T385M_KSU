@@ -14,8 +14,8 @@ if [[ "$1" == "-c" ]]; then
     [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 fi
 
-make ${COMMON_ARGS} msm8937_sec_defconfig VARIANT_DEFCONFIG=msm8937_sec_gta2slte_sea_open_defconfig SELINUX_DEFCONFIG=selinux_defconfig | tee -a build.log
-make ${COMMON_ARGS} | tee -a build.log
+make ${COMMON_ARGS} msm8937_sec_defconfig VARIANT_DEFCONFIG=msm8937_sec_gta2slte_sea_open_defconfig SELINUX_DEFCONFIG=selinux_defconfig 2>&1 | tee -a build.log
+make ${COMMON_ARGS} 2>&1 | tee -a build.log
 
 cp ${OUT_DIR}/arch/arm/boot/Image $(pwd)/arch/arm/boot/zImage
 
