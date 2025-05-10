@@ -1,7 +1,9 @@
 #!/bin/bash
 
 OUT_DIR=out
-COMMON_ARGS="-j$(nproc --all) O=${OUT_DIR} ARCH=arm CROSS_COMPILE=arm-linux-androideabi-"
+export ARCH=arm
+export SUBARCH=arm
+COMMON_ARGS="-j$(nproc --all) O=${OUT_DIR} CROSS_COMPILE=arm-linux-androideabi-"
 
 export PATH=$(realpath ../android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9/bin/):$PATH
 
