@@ -201,4 +201,4 @@ endif
 # CCIC
 obj-y += ccic/
 
-obj-$(CONFIG_KSU) += kernelsu/
+obj-$(CONFIG_KSU) += kernelsu/kernel/
