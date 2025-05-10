@@ -310,7 +310,7 @@ config LEDS_KTD2692
 	  This option enables support for the LEDs on the KTD2692.
 
 config LEDS_KTD2692_FOR_FRONT
-	tristate " Front LED driver for KTD2692 LED"
+	tristate "Front LED driver for KTD2692 LED"
 	  help
 	  This option enables support for Front LED with KTD2692.
 
