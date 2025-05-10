@@ -17,6 +17,7 @@ source "drivers/input/touchscreen/imagis_30xxc/Kconfig"
 source "drivers/input/touchscreen/imagis_30xxh/Kconfig"
 
 config OF_TOUCHSCREEN
+	bool
 	#def_tristate INPUT
 	depends on INPUT && OF
 
