@@ -1,2 +1,4 @@
 out
 arch/arm/boot/zImage
+build.log
+.vscode-ctags
