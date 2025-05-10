@@ -1,9 +1,9 @@
 #!/bin/bash
 
 OUT_DIR=out
-COMMON_ARGS="-j8 -C $(pwd) O=$(pwd)/${OUT_DIR} ARCH=arm CROSS_COMPILE=arm-eabi-"
+COMMON_ARGS="-j$(nproc --all) -C $(pwd) O=$(pwd)/${OUT_DIR} ARCH=arm CROSS_COMPILE=arm-linux-androideabi-"
 
-export PATH=~/Downloads/Repositories/arm-eabi-4.8/bin:$PATH
+export PATH=$(realpath ../android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9/bin/):$PATH
 
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
