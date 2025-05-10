@@ -3691,6 +3691,7 @@ static int selinux_kernel_module_request(char *kmod_name)
 			    SYSTEM__MODULE_REQUEST, &ad);
 }
 
+#if 0
 static int selinux_kernel_module_from_file(struct file *file)
 {
 	struct common_audit_data ad;
@@ -3722,6 +3723,7 @@ static int selinux_kernel_module_from_file(struct file *file)
 	return avc_has_perm(sid, isec->sid, SECCLASS_SYSTEM,
 				SYSTEM__MODULE_LOAD, &ad);
 }
+#endif
 
 static int selinux_task_setpgid(struct task_struct *p, pid_t pgid)
 {
