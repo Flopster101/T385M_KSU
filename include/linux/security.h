@@ -1492,8 +1492,6 @@ int security_old_inode_init_security(struct inode *inode, struct inode *dir,
 				     const struct qstr *qstr, const char **name,
 				     void **value, size_t *len);
 int security_inode_create(struct inode *dir, struct dentry *dentry, umode_t mode);
-int security_inode_post_create(struct inode *dir, struct dentry *dentry,
-			       umode_t mode);
 int security_inode_link(struct dentry *old_dentry, struct inode *dir,
 			 struct dentry *new_dentry);
 int security_inode_unlink(struct inode *dir, struct dentry *dentry);
@@ -1539,7 +1537,6 @@ int security_file_send_sigiotask(struct task_struct *tsk,
 				 struct fown_struct *fown, int sig);
 int security_file_receive(struct file *file);
 int security_file_open(struct file *file, const struct cred *cred);
-bool security_allow_merge_bio(struct bio *bio1, struct bio *bio2);
 
 int security_task_create(unsigned long clone_flags);
 void security_task_free(struct task_struct *task);
@@ -1607,6 +1604,19 @@ void security_release_secctx(char *secdata, u32 seclen);
 int security_inode_notifysecctx(struct inode *inode, void *ctx, u32 ctxlen);
 int security_inode_setsecctx(struct dentry *dentry, void *ctx, u32 ctxlen);
 int security_inode_getsecctx(struct inode *inode, void **ctx, u32 *ctxlen);
+
+static inline int security_inode_post_create(struct inode *dir,
+					     struct dentry *dentry,
+					     umode_t mode)
+{
+	return 0;
+}
+
+static inline bool security_allow_merge_bio(struct bio *bio1, struct bio *bio2)
+{
+	return true;
+}
+
 #else /* CONFIG_SECURITY */
 struct security_mnt_opts {
 };
@@ -1852,13 +1862,6 @@ static inline int security_inode_create(struct inode *dir,
 	return 0;
 }
 
-static inline int security_inode_post_create(struct inode *dir,
-					     struct dentry *dentry,
-					     umode_t mode)
-{
-	return 0;
-}
-
 static inline int security_inode_link(struct dentry *old_dentry,
 				       struct inode *dir,
 				       struct dentry *new_dentry)
@@ -2060,11 +2063,6 @@ static inline int security_file_open(struct file *file,
 				     const struct cred *cred)
 {
 	return 0;
-}
-
-static inline bool security_allow_merge_bio(struct bio *bio1, struct bio *bio2)
-{
-	return true;
 }
 
 static inline int security_task_create(unsigned long clone_flags)
