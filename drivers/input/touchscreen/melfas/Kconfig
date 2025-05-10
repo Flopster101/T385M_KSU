@@ -25,7 +25,7 @@ config TOUCHSCREEN_MELFAS_MMS438
           To compile this driver as a module, choose M here: the module will be called mms_ts.
 
 config TOUCHSCREEN_DUMP_MODE
-        tristate "TSP dump mode"
+        bool "TSP dump mode"
         depends on I2C
 
 endif
